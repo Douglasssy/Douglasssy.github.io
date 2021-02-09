@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search>
+  
+  
+  
+  <entry>
+    <title>使用Hexo创建的第一篇文章</title>
+    <link href="/2021/02/08/%E4%BD%BF%E7%94%A8Hexo%E5%88%9B%E5%BB%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/"/>
+    <url>/2021/02/08/%E4%BD%BF%E7%94%A8Hexo%E5%88%9B%E5%BB%BA%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E6%96%87%E7%AB%A0/</url>
+    
+    <content type="html"><![CDATA[<h1 id="测试Markdown语法"><a href="#测试Markdown语法" class="headerlink" title="测试Markdown语法"></a>测试Markdown语法</h1><a id="more"></a><h2 id="标题"><a href="#标题" class="headerlink" title="标题"></a>标题</h2><p>使用标题时要加 ‘#’ 号  </p><h2 id="段落"><a href="#段落" class="headerlink" title="段落"></a>段落</h2><p>使用两个回车来换行</p><p>这是第一段</p><p>这是第二段</p><h2 id="区块引用"><a href="#区块引用" class="headerlink" title="区块引用"></a>区块引用</h2><blockquote><p>使用 ‘&gt;’ 符号开头进行高亮引用</p></blockquote><h2 id="超链接"><a href="#超链接" class="headerlink" title="超链接"></a>超链接</h2><p>使用 [ 名称 ] ( url ) 来创建超链接，比如：<a href="https://www.bilibili.com/">哔哩哔哩</a></p><h2 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h2><p>使用 ! [ ] ( ) 来插入图片，效果：</p><p><img src="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=2974142077,1133506341&fm=26&gp=0.jpg" alt="cyber punk"></p><h2 id="无序列表"><a href="#无序列表" class="headerlink" title="无序列表"></a>无序列表</h2><p>以 * 开头，效果：</p><ul><li>第一</li><li>第二</li><li>第三</li></ul><h2 id="有序列表"><a href="#有序列表" class="headerlink" title="有序列表"></a>有序列表</h2><p>‘数字’ + ‘.’ + ‘空格’ 开头，效果：</p><ol><li>第一</li><li>第二</li><li>第三</li></ol><h2 id="分割线"><a href="#分割线" class="headerlink" title="分割线"></a>分割线</h2><p>三个或以上的 ‘—‘ 或者 ‘***’ ，效果：</p><hr><h3 id="未完待续。。。"><a href="#未完待续。。。" class="headerlink" title="未完待续。。。"></a>未完待续。。。</h3>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  <entry>
+    <title>Hello World</title>
+    <link href="/2021/02/08/hello-world/"/>
+    <url>/2021/02/08/hello-world/</url>
+    
+    <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo new <span class="hljs-string">&quot;My New Post&quot;</span><br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo server<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo generate<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs bash">$ hexo deploy<br></code></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>]]></content>
+    
+    
+    
+  </entry>
+  
+  
+  
+  
+</search>
