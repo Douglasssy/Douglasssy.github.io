@@ -1,0 +1,543 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V1.1/source/img/favicon.png">
+  <link rel="icon" type="image/png" href="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V1.1/source/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="主要是用来记笔记">
+  <meta name="author" content="Douglasssy">
+  <meta name="keywords" content="">
+  <title>前后端分离项目【1】 - Douglasssy&#39;s Blog</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.4.0/styles/monokai.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.8.7","typing":{"enable":true,"typeSpeed":40,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":4},"lazyload":{"enable":true,"onlypost":false},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}}};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>Douglasssy's Blog</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/%E7%AC%94%E8%AE%B0">
+                <i class="iconfont icon-code"></i>
+                学习
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/%E6%91%84%E5%BD%B1">
+                <i class="iconfont icon-instagram-fill"></i>
+                摄影
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" href="javascript:">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V2.2/source/img/page_banner.png') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="前后端分离项目【1】">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-26 17:25" pubdate>
+        2021年7月26日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      15
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">前后端分离项目【1】</h1>
+            
+            <div class="markdown-body">
+              <h1 id="环境搭建与基本配置"><a href="#环境搭建与基本配置" class="headerlink" title="环境搭建与基本配置"></a>环境搭建与基本配置</h1><a id="more"></a>
+
+<h2 id="一、写在前面"><a href="#一、写在前面" class="headerlink" title="一、写在前面"></a>一、写在前面</h2><p><strong>关键词</strong>：</p>
+<ul>
+<li>前后端分离，虚拟环境，Django，Vue，VScode</li>
+</ul>
+<p><strong>目的</strong>：</p>
+<ul>
+<li><p>使用虚拟环境/工作区/版本控制等方式，维护本机良好的工程环境</p>
+</li>
+<li><p>对前后端分离&amp;协作的体系和流程建立清晰认识</p>
+</li>
+<li><p>为自己后续的开发建立参考文档和日志记录</p>
+</li>
+</ul>
+<p><strong>版本</strong>：</p>
+<ul>
+<li>python_3.8， Django_3.1， Node_16.5， vue/cli_4.5</li>
+</ul>
+<p><strong>结构</strong>：</p>
+<ul>
+<li>前后端均在wrapper虚拟环境下运行，与本地环境无关：python_env【 –Django  –Node_env【 –vue 】</li>
+<li>Vue的前端分离是单页的，挂载在app标签下：书写页面不会刷新跳转浏览器</li>
+</ul>
+<h2 id="二、环境搭建"><a href="#二、环境搭建" class="headerlink" title="二、环境搭建"></a>二、环境搭建</h2><h3 id="1、后端环境安装"><a href="#1、后端环境安装" class="headerlink" title="1、后端环境安装"></a>1、后端环境安装</h3><p><strong>目的：</strong>python + pip + Django</p>
+<ul>
+<li><p>安装虚拟环境envs</p>
+</li>
+<li><p>pip安装Django</p>
+</li>
+<li><p>Django-admin创建项目和app</p>
+</li>
+<li><p>app添加到项目的settings.py，挂载关联</p>
+</li>
+<li><p>可以通过manage.py开始运行服务器，可指定端口，ctrl+c退出，ctrl+z挂起。</p>
+</li>
+</ul>
+<h3 id="2、后端接口配置"><a href="#2、后端接口配置" class="headerlink" title="2、后端接口配置"></a>2、后端接口配置</h3><p><strong>数据资源</strong></p>
+<p><strong>目的：</strong>传递json数据的API</p>
+<ul>
+<li><p>安装挂载Django生态内的：rest_framework库</p>
+</li>
+<li><p>编写MTV view视图（即MVC controller）：如何处理数据返回json的方法</p>
+</li>
+<li><p>编写url：导入app里的views视图模版，将localhost/api_01写入路由，使其成为可访问接口</p>
+</li>
+</ul>
+<p><strong>静态资源</strong></p>
+<p><strong>目的：</strong>访问文件夹和图片文件的API</p>
+<ul>
+<li><p>settings里，改用Path解决相对路径问题，使其指向项目而不是系统内绝对地址<br>用户访问视角media_url，文件存放位置media_root = BASE_DIR</p>
+</li>
+<li><p>urls里，导入settings，导入静态路由制作方法（官方文档有）</p>
+</li>
+<li><p>成功为Django设置了url跳转，url使用settings传入的相对路径</p>
+</li>
+</ul>
+<p><strong>一些坑：</strong></p>
+<ul>
+<li>项目文件夹创建在虚拟环境下，又直接拖进vscode，导致路径和解释器使用错误，不能正确导入虚拟环境目录下的包。重建后解决。</li>
+<li>指定相对路径后无法直接访问8000根目录，因为此时还没写首页，没有路由。</li>
+</ul>
+<h3 id="3、前端环境安装"><a href="#3、前端环境安装" class="headerlink" title="3、前端环境安装"></a>3、前端环境安装</h3><p><strong>目的：</strong>Node.js + npm + vue</p>
+<ul>
+<li><p>在虚拟环境中安装node.js确保版本隔离，使用nodeenv联结到virtualenv，具体操作参考nodeenv主页。</p>
+</li>
+<li><p>安装cnpm和vuecli</p>
+<p>cnpm的一些安装细节参考：<a target="_blank" rel="noopener" href="https://blog.csdn.net/qq_35868412/article/details/103868337">https://blog.csdn.net/qq_35868412/article/details/103868337</a></p>
+</li>
+<li><p>vue ui 创建项目文件夹，用npm管理，default Vue3</p>
+</li>
+<li><p>安装 页面路由管理插件vue-router，全局状态管理插件vuex，在node_modules文件夹中</p>
+</li>
+<li><p>可以开始编辑App.vue页面</p>
+</li>
+</ul>
+<p><strong>一些坑：</strong></p>
+<ul>
+<li><p>虚拟环境nodeenv操作报错：</p>
+<p>urllib.error.URLError: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1108)&gt;</p>
+<p>解决：</p>
+<p>参考官方文档在虚拟环境装nodeenv，本地环境安装certifi，重启虚拟环境，再进入虚拟环境后可以部署node</p>
+<figure class="highlight shell"><figcaption><span>l</span></figcaption><table><tr><td class="gutter hljs"><div class="hljs code-wrapper"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></div></td><td class="code"><div class="hljs code-wrapper"><pre><code class="hljs shell"><span class="hljs-meta">$</span><span class="bash"> pip install certifi</span><br><span class="hljs-meta">$</span><span class="bash"> python3 -m certifi</span><br>/Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/certifi/cacert.pem<br><span class="hljs-meta">$</span><span class="bash"> <span class="hljs-built_in">cd</span> /Library/Frameworks/Python.framework/Versions/3.8/etc/openssl/</span><br><span class="hljs-meta">$</span><span class="bash"> ln -s /Library/Frameworks/Python.framework/Versions/3.8/lib/python3.8/site-packages/certifi/cacert.pem cert.pem</span><br></code></pre></div></td></tr></table></figure></li>
+<li><p>既然webpack管理下的node会在项目下创建环境和依赖，虚拟环境的收益还明显吗？只能说增加冗余维护秩序吧。</p>
+</li>
+</ul>
+<h3 id="4、前端接口配置"><a href="#4、前端接口配置" class="headerlink" title="4、前端接口配置"></a>4、前端接口配置</h3><ul>
+<li>运行Vue在8000端口，运行Django在9000端口</li>
+<li>编辑APP.vue页面样式，引用9000端口下图片位置</li>
+<li>成功用前端对接展示后端数据</li>
+</ul>
+<p><strong>一些疑问：</strong></p>
+<ul>
+<li>运行两个shell两个服务两个端口：端口与shell与进程/线程的关系？</li>
+<li>HTML内直接填写后端地址就能访问图片：如何路由另一端口？因为都在localhost？Vue的功能？具体通信方式？</li>
+</ul>
+<h2 id="三、跨域与绑定"><a href="#三、跨域与绑定" class="headerlink" title="三、跨域与绑定"></a>三、跨域与绑定</h2><p>目的：前后端分离以后，使用JavaScript的AJAX请求异步获取JSON数据，不必再使用HTTP请求头每次都刷新页面</p>
+<h3 id="1、访问API路由"><a href="#1、访问API路由" class="headerlink" title="1、访问API路由"></a>1、访问API路由</h3><ul>
+<li>安装axios库：vue控制台安装开发依赖，node_module内会出现</li>
+<li>引用axios库：使用axios函数高效创建AJAX请求，get方法获取服务器文件，生命周期为mounted</li>
+<li>结果：确实会访问服务器相应端口，但提示 “拦截远程跨源请求CORS“</li>
+</ul>
+<h3 id="2、CORS"><a href="#2、CORS" class="headerlink" title="2、CORS"></a>2、CORS</h3><ul>
+<li>全称“跨源资源共享”。出于安全性原因，不是同一网域/协议/端口的请求会受限制，避免别人的前端访问。具体标准略。</li>
+<li>安装django-cors-headers到服务器</li>
+<li>挂载和设置，参考pypi社区django-cors-headers文档</li>
+<li>允许前端接口和域名访问、允许多种请求方式、允许多种请求头</li>
+</ul>
+<h3 id="3、绑定"><a href="#3、绑定" class="headerlink" title="3、绑定"></a>3、绑定</h3><ul>
+<li>后端返回的res内有数据，前端读取所需数据</li>
+<li>将数据存入变量，渲染时调用改变页面，即变量绑定</li>
+<li>JS和HTML渲染传递的细节由框架和语言实现</li>
+</ul>
+<h3 id="4、升级为Vue3语法"><a href="#4、升级为Vue3语法" class="headerlink" title="4、升级为Vue3语法"></a>4、升级为Vue3语法</h3><ul>
+<li>补丁式更新，配置型option API → 组合型composition API，组合在一起更方便构建车轮</li>
+<li>option API：data、mounted、methods都要自己编写和传入对象</li>
+<li>composition API：<ul>
+<li>setup函数，执行周期先于所有VUE生命周期，其return可以用于页面绑定</li>
+<li>function方法，也可以返回给页面绑定，而不像vue2的data只返回data</li>
+<li>const常量，导入ref方法可构建为响应式字符串</li>
+<li>return时，test常量当然语法报错，需要用test.value代理调用</li>
+</ul>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/%E7%AC%94%E8%AE%B0/">笔记</a>
+                    
+                  </div>
+                
+                
+              </div>
+              
+                <p class="note note-warning">本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！</p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/02/22/JavaScript%E7%AC%94%E8%AE%B0/">
+                        <span class="hidden-mobile">JavaScript笔记</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <i class="iconfont icon-github-fill"></i> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+<!-- SCRIPTS -->
+
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/debouncer.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.0/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.0/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.6/dist/clipboard.min.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+  <script>
+    (function () {
+      var path = "/local-search.xml";
+      var inputArea = document.querySelector("#local-search-input");
+      inputArea.onclick = function () {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+        this.onclick = null
+      }
+    })()
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+
+</body>
+</html>
