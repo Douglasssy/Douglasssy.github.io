@@ -17,7 +17,7 @@
   <meta name="description" content="主要是用来记笔记">
   <meta name="author" content="Douglasssy">
   <meta name="keywords" content="">
-  <title>前后端分离项目【2】 - Douglasssy&#39;s Blog</title>
+  <title>前后端分离项目【3】 - Douglasssy&#39;s Blog</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" />
 
@@ -150,7 +150,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="前后端分离项目【2】">
+            <span class="h2" id="subtitle" title="前后端分离项目【3】">
               
             </span>
 
@@ -160,8 +160,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-08-04 15:30" pubdate>
-        2021年8月4日 下午
+      <time datetime="2021-09-14 14:38" pubdate>
+        2021年9月14日 下午
       </time>
     </span>
   
@@ -172,7 +172,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1k 字
+      1.1k 字
     </span>
   
 
@@ -182,7 +182,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      11
+      12
        分钟
     </span>
   
@@ -212,156 +212,183 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">前后端分离项目【2】</h1>
+            <h1 style="display: none">前后端分离项目【3】</h1>
             
             <div class="markdown-body">
-              <h1 id="websocket配置与同步通信"><a href="#websocket配置与同步通信" class="headerlink" title="websocket配置与同步通信"></a>websocket配置与同步通信</h1><a id="more"></a>
+              <h1 id="异步通信与用户数据鉴权"><a href="#异步通信与用户数据鉴权" class="headerlink" title="异步通信与用户数据鉴权"></a>异步通信与用户数据鉴权</h1><a id="more"></a>
 
-<h2 id="一、写在前面"><a href="#一、写在前面" class="headerlink" title="一、写在前面"></a>一、写在前面</h2><p><strong>版本：</strong>暂用channels3.0、redis6.2.4、channels-redis3.3、</p>
-<p><strong>链接类型：</strong></p>
-<ul>
-<li><p>浏览器主动请求：DNS解析、HTTP短链接</p>
-<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.0/source/img/WebsocketChatroom/img1.jpg" srcset="/img/loading.gif" alt="img1" style="zoom: 67%;" /></p>
-</li>
-<li><p>服务器主动推送：websocket长链接</p>
-<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.0/source/img/WebsocketChatroom/img2.jpg" srcset="/img/loading.gif" alt="img2" style="zoom: 50%;" /></p>
-</li>
-</ul>
-<p><strong>WSGI与ASGI：</strong></p>
-<ul>
-<li><p>WSGI（Python Web Server Gateway Interface）网络服务器网关接口</p>
-<p>ASGI（Asynchronous Server Gateway Interface）异步服务器网关接口</p>
-</li>
-<li><p>WSGI基于HTTP协议模式开发，不支持websocket。ASGI补充了当前web开发中一些新的协议标准，支持原有模式和Websocket扩展。即，ASGI是WSGI的扩展.</p>
-</li>
-</ul>
-<h2 id="二、前端配置"><a href="#二、前端配置" class="headerlink" title="二、前端配置"></a>二、前端配置</h2><ul>
-<li><p>主体：</p>
-<ul>
-<li><p>主体盒布局，文本框flex布局</p>
-</li>
-<li><p>分为logo、message、input三个区域</p>
-</li>
-</ul>
-</li>
-<li><p>消息记录和滚动条：</p>
-<ul>
-<li>v-for循环创建message类气泡， :key绑定为消息列表序号</li>
-<li>v-for循环次数由消息列表长度决定</li>
-<li>气泡换行样式：fit-content，word-breal，word-wrap，white-space</li>
-<li>滚动窗口样式：overflow-y</li>
-</ul>
-</li>
-</ul>
-<p>​        <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.0/source/img/WebsocketChatroom/img8.jpg" srcset="/img/loading.gif" alt="img8" style="zoom: 33%;" /></p>
-<ul>
-<li><p>前端WS</p>
-<ul>
-<li>前端构建WS实例，用浏览器自带WebSocket()方法，类似HTTP协议 ws://</li>
-<li>将建立的WS实例所需方法指向自己写的对应开/关/收/发函数</li>
-</ul>
-</li>
-<li><p>监听输入框，绑定发送按钮点击事件</p>
-<ul>
-<li>v-model监听输入框、@click</li>
-<li>点击事件将输入框内容推入消息列表，清空已发送输入框</li>
-</ul>
-</li>
-</ul>
-<h2 id="三、后端配置"><a href="#三、后端配置" class="headerlink" title="三、后端配置"></a>三、后端配置</h2><ul>
-<li><p>安装异步插件</p>
-<ul>
-<li>安装channels，挂载到Django_APPS</li>
-<li>配置Django设置和asgi文件，具体参考channels官方文档</li>
-<li>原有配置能对接上前端，完成</li>
-</ul>
-</li>
-<li><p>为channels接管配置路由</p>
-<ul>
-<li>创建独立于Django原有MVT模式的文件用来写WS，并和原有MVT文件关联</li>
-<li>HTTP路由跳转：asgi –&gt; get_wsgi_application –&gt; 交给channels</li>
-<li>WS路由跳转： asgi –&gt; middleWare –&gt; 交给channels子类：routing –&gt; consumers.chatConsumer</li>
-</ul>
-</li>
-<li><p>创建consumers.py代替views.py</p>
-<ul>
-<li><p>后端myapp下创建“consumers.py”文件，用来写API view，不放在views.py区别于http，便于管理。</p>
-</li>
-<li><p>创建一个类来继承导入的channels.WebsocketConsumer对象</p>
-</li>
-<li><p>为这个类添加自己的 链接/断开/接收 的方法函数</p>
-</li>
-</ul>
-</li>
-<li><p>创建routing.py代替urls.py</p>
-<ul>
-<li>为asgi添加ws路由：指向自己写的routing路由，导入URLrouter等必要的组件</li>
-<li>routing指向自己写的consumers视图：内有处理ws的类，re_path代表正则路径写法</li>
-<li>chatConsumer类处理ws：链接/断开/接收对应前端编写的ws方法</li>
-</ul>
-</li>
-</ul>
-<h2 id="四、前后交互"><a href="#四、前后交互" class="headerlink" title="四、前后交互"></a>四、前后交互</h2><ul>
-<li><p>再看一次交互逻辑图，前后端将消息转为自己的格式后处理，发送时再转成标准JSON格式</p>
-<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.0/source/img/WebsocketChatroom/img2.jpg" srcset="/img/loading.gif" alt="img2" style="zoom:50%;" /></p>
-</li>
-</ul>
-<ul>
-<li><p>前端打开发送：</p>
-<ul>
-<li><p>函数接口只接触自建方法，而不是直接调用实例</p>
-</li>
-<li><p>打开链接以后立即调用发送方法，发送一条消息</p>
-</li>
-<li><p>发送方法接收msg参数，用JSON.stringify转为标准JSON格式，交给ws实例自带的send方法</p>
-</li>
-</ul>
-</li>
-<li><p>后端接收回复：</p>
-<ul>
-<li>导入的json模块提取文本转为字典</li>
-<li>检测前端发送前是否转JSON成功</li>
-<li>提取字典中的message字段</li>
-<li>把提取出的字段填到标准json中发送</li>
+<h2 id="一、后端配置"><a href="#一、后端配置" class="headerlink" title="一、后端配置"></a>一、后端配置</h2><ul>
+<li>基本异步<ul>
+<li>async - await：已有函数转为异步模式</li>
+<li>去除调试用函数async_to_sync</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li>前端接收：<ul>
-<li>onMessage方法接收服务器字符串，用JSON.parse方法转为JavaScript对象</li>
-</ul>
-</li>
-</ul>
-<h2 id="五、聊天功能"><a href="#五、聊天功能" class="headerlink" title="五、聊天功能"></a>五、聊天功能</h2><ul>
-<li><p>从脱机到C2S：消息展示的更新</p>
-<ul>
-<li><p>规范联机通信格式，点击发送后交给sendMessage方法</p>
-</li>
-<li><p>发送给后端，后端全局广播中转后返回</p>
-</li>
-<li><p>接收到前端，JSON.parse().message提取所需字段，推入消息列表后展示到窗口</p>
-</li>
-<li><p>此时状态如下图：</p>
-<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.0/source/img/WebsocketChatroom/img6.jpg" srcset="/img/loading.gif" alt="img6" style="zoom:50%;" /></p>
-</li>
+<li>用户系统鉴权机制<ul>
+<li>Django自带使用cookie+session</li>
+<li>前后端分离使用token + jwt</li>
+<li>Django自带用户组管理。manage.py创建超级用户、可以备份迁移数据库</li>
+<li>Navicat 链接SQLite数据库，可以查看后端session</li>
+<li>浏览器F12调试，可以查看前端cookie</li>
 </ul>
 </li>
 </ul>
 <ul>
-<li><p>从C2S到C2C：通道层、用户组、缓存数据的读取使用</p>
+<li><p>自定义API路由</p>
 <ul>
-<li><p>本机brew安装Redis并启动服务端，虚拟环境安装channels-redis</p>
+<li><p>从 urls—&gt; views—&gt; function 到 url—&gt; api_url—&gt; api_view—&gt; function</p>
 </li>
-<li><p>参考channels配置路由：后端的routing和consumer进行正则匹配，路由到不同的房间和通道层用户组。此时不同IP仍不能通信，因为发送的消息还留在缓存里</p>
+<li><p>myapp下新建api_url文件，相当于二级路由跳转，所有api_02下的路由都路由到此文件</p>
 </li>
-<li><p>后端整理消息，读取缓存键值对并广播给用户组，用户组收取信息发给各前端：<br>channels框架定义了监听方法，会根据type值调用同名方法，这个同名方法便可实现推送消息到前端</p>
+<li><p>myapp下新建api文件，专门用来写@api_view，区别于普通urls跳转到view</p>
 </li>
-<li><p>此时状态如下图：</p>
-<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.0/source/img/WebsocketChatroom/img7.jpg" srcset="/img/loading.gif" alt="img7" style="zoom: 67%;" /></p>
+<li><p>include方式导包实现url到api_url的跳转</p>
+</li>
+<li><p>装饰器增加POST接口</p>
 </li>
 </ul>
 </li>
-<li><p>至此，同步通信模式的聊天室搭建完毕</p>
+<li><p>踩坑：</p>
+<ul>
+<li>忘了开redis后台，debug报错很多，仔细一看发现问题在redis端口后解决</li>
+</ul>
+</li>
+</ul>
+<h2 id="二、前端配置"><a href="#二、前端配置" class="headerlink" title="二、前端配置"></a>二、前端配置</h2><p>填写表单—验证—令牌</p>
+<ul>
+<li><p>基本登陆界面</p>
+<ul>
+<li><p>创建Vue组件文件，由JavaScript命名为LoginBox，挂载引用到APP.vue中</p>
+</li>
+<li><p>和APP一样，每个组件只有一个div</p>
+</li>
+<li><p>写一个全网页的固定位置透明黑蒙版，scoped style只作用于当前文件，</p>
+</li>
+<li><p>写一个好看的登陆横幅</p>
+</li>
+</ul>
+</li>
+<li><p>创建登陆表单</p>
+<ul>
+<li>v-model和@click绑定输入框和按钮</li>
+<li>利用axios创建点击函数，post方法传数据给后端接口</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>美化登陆弹窗:<ul>
+<li>vue开发依赖安装sweetalert，自定义命名导包为“swal”。生态内也有很多其他的，自选。</li>
+<li>swal是第三方函数，并不能像原生alert一样阻塞程序。登陆框会在弹出时消失，不符合设计</li>
+<li>异步swal函数，then内判断alert点击后隐藏登陆界面</li>
+<li>完善swal按钮，区分点击任意位置/按钮的行为</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>踩坑：<ul>
+<li>无法安装开发依赖，淘宝源又问题？</li>
+<li>结果是梯子和网络和npm冲突，换环境重启解决</li>
+</ul>
+</li>
+</ul>
+<h2 id="三、鉴权登陆"><a href="#三、鉴权登陆" class="headerlink" title="三、鉴权登陆"></a>三、鉴权登陆</h2><h3 id="概念结构"><a href="#概念结构" class="headerlink" title="概念结构"></a>概念结构</h3><ul>
+<li><p>MVVM与MTV：</p>
+<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.1/source/img/WebsocketChatroom/img10.jpg" srcset="/img/loading.gif" style="zoom:50%;" /></p>
+</li>
+</ul>
+<ul>
+<li><p>Token：</p>
+<p>​    <img src="https://cdn.jsdelivr.net/gh/Douglasssy/blogCDN@V3.1/source/img/WebsocketChatroom/img11.jpg" srcset="/img/loading.gif" style="zoom:50%;" />    </p>
+<p>​    </p>
+</li>
+<li><p>基本通信方式：</p>
+<ul>
+<li>后端return Request( )，调用rest_framework向前端发送</li>
+<li>前端用json向后端发送，调用axios快速创建和整理</li>
+</ul>
+</li>
+</ul>
+<h3 id="前–-gt-后–-gt-库"><a href="#前–-gt-后–-gt-库" class="headerlink" title="前–&gt;后–&gt;库"></a>前–&gt;后–&gt;库</h3><ul>
+<li>当前状态：<ul>
+<li>前端发送账户密码表单，后端接收后回复“ok”，前端接收到res内的“ok”</li>
+<li>后端从POST接收到的字典为空，没能正确读取前端表单</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>前端整理发送data数据：<ul>
+<li>vue-cli 中安装整理数据的qs依赖包，LoginBox组件中导入</li>
+<li>用Qs.stringily( )整理axios传递的data项，JS对象成功转为标准Json</li>
+<li>后端从POST接收到字典正常</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p>后端用户验证</p>
+<ul>
+<li><p>不用傻傻地自己写了，不必也不能，直接使用Django的哈希密码校验</p>
+</li>
+<li><p>filter( )从Django自带用户表中搜索对应用户名</p>
+</li>
+<li><p>check_password( )比对用户名对应密码的哈希值</p>
+</li>
+<li><p>写出if-else判断出口，返回不同状态码给前端</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="库–-gt-后–-gt-前"><a href="#库–-gt-后–-gt-前" class="headerlink" title="库–&gt;后–&gt;前"></a>库–&gt;后–&gt;前</h3><ul>
+<li>库创建token表<ul>
+<li>rest_framework.authtoken 组件导入到Settings</li>
+<li>rest_framework.authtoken.modles 组件导入到api</li>
+<li>python manage.py migration合并authtoken的表到数据库</li>
+<li>此时Django后台会有Token表存在，和User表有映射关系（细节不表</li>
+<li>进入后台可以手动添加Token记录</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>后端返回Token<ul>
+<li>根据用户名，更新/创建/获取token记录</li>
+<li>token表是&lt;key, user&gt;形式</li>
+<li>key就是加密的token令牌，发送给前端</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>前端保存Token<ul>
+<li>刷新页面时vue.js的生命周期会重启，唯一能利用的是缓存/Cookie</li>
+<li>判断到达出口后，从res中接收token，setitem到缓存</li>
+<li>v-if更改登录图层的显示/关闭</li>
+</ul>
+</li>
+</ul>
+<h2 id="四、新建数据表"><a href="#四、新建数据表" class="headerlink" title="四、新建数据表"></a>四、新建数据表</h2><ul>
+<li><p>自建模型，继承自Django model.Model</p>
+<ul>
+<li><p>安装pillow处理头像图片数据</p>
+</li>
+<li><p>设置数据项，设置缺省值，创建自增int函数</p>
+</li>
+<li><p>makemigration + migrate迁移到SQLite</p>
+</li>
+</ul>
+</li>
+<li><p>链接自建模型生成的userInfo表 / 框架自带auth_user表</p>
+<ul>
+<li>OneToOneFiled( )，CASCADE级联绑定auth_user表，删除原表内容时，自建表也删除</li>
+<li>Navicat可以连接到数据库查看各项详细</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>填充数据<ul>
+<li>在admin中注册自建的model，可以在Django后台页面看到自建数据库model</li>
+<li>此时可以后台手动添加用户信息</li>
+<li>belong项可以关联到User表中的某个用户</li>
+<li>avatar会关联到upload，是因为settings内设置的上传目录是upload</li>
+</ul>
 </li>
 </ul>
 
@@ -387,9 +414,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/09/14/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E3%80%903%E3%80%91/">
+                      <a href="/2021/09/14/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E3%80%904%E3%80%91/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">前后端分离项目【3】</span>
+                        <span class="hidden-mobile">前后端分离项目【4】</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -397,8 +424,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/26/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E3%80%901%E3%80%91/">
-                        <span class="hidden-mobile">前后端分离项目【1】</span>
+                      <a href="/2021/08/04/%E5%89%8D%E5%90%8E%E7%AB%AF%E5%88%86%E7%A6%BB%E9%A1%B9%E7%9B%AE%E3%80%902%E3%80%91/">
+                        <span class="hidden-mobile">前后端分离项目【2】</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
